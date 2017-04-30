@@ -16,4 +16,8 @@ class LitterBoxEntriesController < ApplicationController
     LitterBoxEntry.toggle_logging
   end
 
+  def litter_report
+    render json: { usage_count: LitterBoxEntry.count }
+  end
+
 end
