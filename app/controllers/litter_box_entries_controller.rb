@@ -3,6 +3,7 @@ class LitterBoxEntriesController < ApplicationController
   def index
     @litter_box_entries = LitterBoxEntry.select(:created_at).all
     render json: @litter_box_entries.map(&:created_at)
+                 .push(paused: Rails.cache.read('paused'))
   end
 
   def log_event
