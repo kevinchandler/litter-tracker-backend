@@ -1,0 +1,19 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: 5
+  username: <%= ENV['DB_USER'] %>
+  password: <%= ENV['DB_PASSWORD'] %>
+  host: <%= ENV['DB_HOST'] %>
+
+development:
+  <<: *default
+  database: litter-tracker-development
+
+test:
+  <<: *default
+  database: litter-tracker-test
+
+production:
+  <<: *default
+  database: litter-tracker
