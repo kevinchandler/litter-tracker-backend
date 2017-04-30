@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
-  resources :litter_box_entries
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  get '/events' => 'litter_box_entries#index'
+  get '/pause' => 'litter_box_entries#pause'
+  get '/resume' => 'litter_box_entries#resume'
+  post '/log-event' => 'litter_box_entries#log_event'
 end

@@ -1,21 +1,22 @@
 class LitterBoxEntriesController < ApplicationController
-  before_action :set_litter_box_entry, only: [:show, :update, :destroy]
 
-  # GET /litter_box_entries
   def index
-    @litter_box_entries = LitterBoxEntry.all
-
-    render json: @litter_box_entries
+    @litter_box_entries = LitterBoxEntry.select(:created_at).all
+    render json: @litter_box_entries.map(&:created_at)
   end
 
-  def create
-    @litter_box_entry = LitterBoxEntry.new(litter_box_entry_params)
-
-    if @litter_box_entry.save
-      render json: @litter_box_entry, status: :created
-    else
-      render json: @litter_box_entry.errors, status: :unprocessable_entity
-    end
+  def log_event
+    render json: @litter_box_entry, status: :accepted
+    LitterBoxEntry.create! if LitterBoxEntry.ok_to_create?
   end
 
+  def pause
+    render json: {}, status: :accepted
+    LitterBoxEntry.pause_logging(true)
+  end
+
+  def resume
+    render json: {}, status: :accepted
+    LitterBoxEntry.pause_logging(false)
+  end
 end
