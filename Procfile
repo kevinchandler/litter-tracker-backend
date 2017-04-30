@@ -1,1 +1,1 @@
-web: web: bundle exec rails server -p 80
+web: bundle exec rails server -p $PORT
