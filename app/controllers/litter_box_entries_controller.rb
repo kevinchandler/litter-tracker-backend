@@ -13,11 +13,7 @@ class LitterBoxEntriesController < ApplicationController
 
   def pause
     render json: {}, status: :accepted
-    LitterBoxEntry.pause_logging(true)
+    LitterBoxEntry.toggle_logging
   end
 
-  def resume
-    render json: {}, status: :accepted
-    LitterBoxEntry.pause_logging(false)
-  end
 end

@@ -18,7 +18,7 @@ class LitterBoxEntry < ApplicationRecord
     return last_entry.created_at < CREATE_ENTRY_EVERY.minutes.ago
   end
 
-  def self.pause_logging(val)
+  def self.toggle_logging
     Rails.cache.write('paused', val, expires_in: 1.hour)
   end
 
