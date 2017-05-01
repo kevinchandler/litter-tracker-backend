@@ -22,6 +22,12 @@ class LitterBoxEntry < ApplicationRecord
   end
 
   def self.toggle_logging
+    paused = Rails.cache.read('paused') || false
+    val = if paused = false
+            true
+          else
+            false
+          end
     Rails.cache.write('paused', val, expires_in: 1.hour)
   end
 
