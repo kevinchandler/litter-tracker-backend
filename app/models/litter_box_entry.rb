@@ -1,6 +1,9 @@
 class LitterBoxEntry < ApplicationRecord
   default_scope { order(created_at: :desc) }
   scope :last_entry, -> { LitterBoxEntry.first }
+  scope :todays_usage, -> {
+      LitterBoxEntry.where('created_at >= ?', 24.hours.ago)
+  }
 
   CREATE_ENTRY_EVERY = 2
 
