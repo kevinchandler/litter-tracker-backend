@@ -18,7 +18,7 @@ class LitterBoxEntriesController < ApplicationController
 
   def litter_report
     render json: {
-        today: LitterBoxEntry.todays_usage.count,
+        twenty_four_hour: LitterBoxEntry.twenty_four_hour_usage.count,
         total: LitterBoxEntry.count
     }
   end

@@ -1,7 +1,7 @@
 class LitterBoxEntry < ApplicationRecord
   default_scope { order(created_at: :desc) }
   scope :last_entry, -> { LitterBoxEntry.first }
-  scope :todays_usage, -> {
+  scope :twenty_four_hour_usage, -> {
       LitterBoxEntry.where('created_at >= ?', 24.hours.ago)
   }
 
@@ -23,11 +23,7 @@ class LitterBoxEntry < ApplicationRecord
 
   def self.toggle_logging
     paused = Rails.cache.read('paused') || false
-    val = if paused = false
-            true
-          else
-            false
-          end
+    val = paused ? false : true
     Rails.cache.write('paused', val, expires_in: 1.hour)
   end
 
