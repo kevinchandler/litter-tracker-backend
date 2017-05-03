@@ -25,6 +25,7 @@ class LitterBoxEntry < ApplicationRecord
     paused = Rails.cache.read('paused') || false
     val = paused ? false : true
     Rails.cache.write('paused', val, expires_in: 1.hour)
+    val
   end
 
   def self.logging_paused?

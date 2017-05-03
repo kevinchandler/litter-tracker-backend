@@ -12,8 +12,7 @@ class LitterBoxEntriesController < ApplicationController
   end
 
   def pause
-    render json: {}, status: :accepted
-    LitterBoxEntry.toggle_logging
+    render json: { paused: LitterBoxEntry.toggle_logging }, status: :accepted
   end
 
   def litter_report
