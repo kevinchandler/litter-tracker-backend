@@ -4,6 +4,7 @@ class LitterBoxEntriesController < ApplicationController
     @litter_box_entries = LitterBoxEntry.select(:created_at).all
     render json: @litter_box_entries.map(&:created_at)
                  .push(paused: Rails.cache.read('paused'))
+                 .push(last_cleaned: LitterBoxCleaning.first.try(:created_at))
   end
 
   def log_event
