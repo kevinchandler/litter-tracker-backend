@@ -7,3 +7,8 @@ cat's going to go next? 💩
 - get `/resume` # resume logging events
 - post `/log-event` # tries to create log entry
 - get `/events` # view log entries
+
+# .env
+```
+API_KEY='super-secret'
+```
