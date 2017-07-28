@@ -1,4 +1,6 @@
 class LitterBoxEntriesController < ApplicationController
+  before_action :authenticate_private, except: :index
+  before_action :authenticate_public, only: :index
 
   def index
     @litter_box_entries = LitterBoxEntry.select(:created_at).all
@@ -23,4 +25,19 @@ class LitterBoxEntriesController < ApplicationController
     }
   end
 
+  private
+
+  def authenticate_public
+    key = params[:api_key]
+    if key && (key != ENV['API_KEY_PUBLIC'] || key != ENV['API_KEY_PRIVATE'])
+      render :forbidden, json: {} and return
+    end
+  end
+
+  def authenticate_private
+    key = params[:api_key]
+    if key && (key != ENV['API_KEY_PRIVATE'])
+      render :forbidden, json: {} and return
+    end
+  end
 end

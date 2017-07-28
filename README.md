@@ -9,6 +9,11 @@ cat's going to go next? 💩
 - get `/events` # view log entries
 
 # .env
+
+`API_KEY_PUBLIC` provides access to `/events` only. `API_KEY_PRIVATE` can access
+any resource
+
 ```
-API_KEY='super-secret'
+API_KEY_PUBLIC='super-secret'
+API_KEY_PRIVATE='super-duper-secret'
 ```
